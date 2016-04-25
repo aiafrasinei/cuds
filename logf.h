@@ -11,22 +11,22 @@ typedef struct {
 } logf_ctx;
 
 
-#define Logf_Create(context) \
+#define Logf_Create(context)                        \
     context = (logf_ctx *)malloc(sizeof(logf_ctx)); \
     memset(context, 0, sizeof(logf_ctx));
 
 #define Logf_Open(context, path, open_type) \
-    context->file = fopen(path, open_type);   
+    context->file = fopen(path, open_type);
 
-#define Logf_Print(context, message, ...) \
+#define Logf_Print(context, message, ...)                                             \
     fprintf(context->file, "%s:%d - " message ,  __FILE__, __LINE__ , ##__VA_ARGS__); \
-    fflush(context->file);  \
+    fflush(context->file);
 
 #define Logf_Close(context) \
-    fclose(context->file);                    
+    fclose(context->file);
 
 #define Logf_Destroy(context) \
-    free(context); \
+    free(context);            \
     context = NULL;
 
 #endif

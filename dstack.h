@@ -13,10 +13,10 @@ typedef struct {
 
 
 /*create stack*/
-#define Dstack_Create(context)\
+#define Dstack_Create(context)                          \
     context = (dstack_ctx *)malloc(sizeof(dstack_ctx)); \
-    memset(context, 0, sizeof(dstack_ctx));\
-    context->size = 0;\
+    memset(context, 0, sizeof(dstack_ctx));             \
+    context->size = 0;                                  \
     context->iter = NULL
 
 #define Dstack_Push(context, datain)                                      \
@@ -34,31 +34,31 @@ typedef struct {
     }                                                                     \
     context->size++;
 
-#define Dstack_Pop(context, dataout)                                    \
-    if (context->size >= 1) {                                           \
-        struct sllnode *temp = context->iter->next;                     \
-        dataout = context->iter->data;                                  \
-        free(context->iter);                                            \
-        context->iter = temp;                                           \
-        context->size--;                                                \
+#define Dstack_Pop(context, dataout)                \
+    if (context->size >= 1) {                       \
+        struct sllnode *temp = context->iter->next; \
+        dataout = context->iter->data;              \
+        free(context->iter);                        \
+        context->iter = temp;                       \
+        context->size--;                            \
     }
     
 
-#define Dstack_Size(context, size)                               \
+#define Dstack_Size(context, size) \
     size = context->size;
 
 /*free stack*/
-#define Dstack_Free(context)                                     \
+#define Dstack_Free(context) \
     context->size = 0;
 
 /*destroy stack*/
-#define Dstack_Destroy(context)                                     \
-    while(context->iter != NULL) {                                  \
-        struct sllnode *next_node = context->iter->next;            \
-        free(context->iter);                                        \
-        context->iter = next_node;                                  \
-    }                                                               \
-    free(context);                                                  \
+#define Dstack_Destroy(context)                          \
+    while(context->iter != NULL) {                       \
+        struct sllnode *next_node = context->iter->next; \
+        free(context->iter);                             \
+        context->iter = next_node;                       \
+    }                                                    \
+    free(context);                                       \
     context = NULL;
 
 #endif

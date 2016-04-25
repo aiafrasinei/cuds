@@ -14,15 +14,9 @@ int tc_1(void) {
     }
     Sllist_Destroy(ctx1);
 
-    return EXIT_SUCCESS;
-
-    error:
-        printf("error: %s %s %d\n", global_err_ctx.module, global_err_ctx.func, global_err_ctx.ret);
-        Sllist_Destroy(ctx1);
-
-        return EXIT_FAILURE;
+    return 0;
 }
 
-int main(int argc, int *argv[]) {
+int main(int argc, char *argv[]) {
     tc_1();
 }
