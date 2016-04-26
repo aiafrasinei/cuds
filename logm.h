@@ -20,4 +20,5 @@
 #define Logm_Close(ctx1, arrdata) \
     Darr_Destroy(ctx1, arrdata); 
 
+	
 #endif

@@ -42,7 +42,6 @@ typedef struct {
         context->iter = temp;                       \
         context->size--;                            \
     }
-    
 
 #define Dstack_Size(context, size) \
     size = context->size;
@@ -61,5 +60,6 @@ typedef struct {
     free(context);                                       \
     context = NULL;
 
+	
 #endif
 

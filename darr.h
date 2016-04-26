@@ -34,8 +34,11 @@ cap - capacity*/
     context->capacity = cap;                                    
 
 /*get array entry*/
-#define Darr_Get(context, data, out, index) \
-    out = &data[index];
+#define Darr_Get(context, data, out, index)  \
+    if(index >= 0 && index < context->size)  \
+        out = &data[index];                  \
+    else                                     \
+        out = NULL;
 
 /*set array entry*/
 #define Darr_Set(context, data, datain, index) \
@@ -65,5 +68,6 @@ cap - capacity*/
     free(context);                  \
     context = NULL;
     
+	
 #endif
 
