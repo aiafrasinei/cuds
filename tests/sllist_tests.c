@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "../sllist.h"
+#include "../sut.h"
 
 
 typedef struct {
@@ -17,34 +18,38 @@ int tc_1(void) {
     int s;
     tdat *dataout = NULL;
 
-    Sllist_Create(ctx1);
+    SLLIST_CREATE(ctx1);
 
-    Sllist_Add(ctx1, data1);
-    Sllist_Add(ctx1, data1);
-    Sllist_Add(ctx1, data1);
-    Sllist_Get(ctx1, 1, dataout);
-    Sllist_Add(ctx1, data2);
+    SLLIST_ADD(ctx1, data1);
+    SLLIST_ADD(ctx1, data1);
+    SLLIST_ADD(ctx1, data1);
+    SLLIST_GET(ctx1, 1, dataout);
+    SUT_ASSERT_VAR_EQUAL(dataout->i, 13);
+    
+    SLLIST_ADD(ctx1, data2);
+    SLLIST_SIZE(ctx1, s);
+    SUT_ASSERT_VAR_EQUAL(s, 4);
 
-    Sllist_Size(ctx1, s);
-    printf("size: %d", s);
-    Sllist_Get(ctx1, 0, dataout);
-    printf("i: %d\n", dataout->i);
-    Sllist_Set(ctx1, 0, data3);
-    Sllist_Get(ctx1, 0, dataout);
-    printf("i: %d\n", dataout->i);
+    SLLIST_GET(ctx1, 0, dataout);
+    SUT_ASSERT_VAR_EQUAL(dataout->i, 13);
+        
+    SLLIST_SET(ctx1, 0, data3);
+    SLLIST_GET(ctx1, 0, dataout);
+    SUT_ASSERT_VAR_EQUAL(dataout->i, 100);
 
 
-    Sllist_Add(ctx1, data1);
-    Sllist_Add(ctx1, data2);
-    Sllist_Size(ctx1, s);
-    printf("intereasting size: %d\n", s);
+    SLLIST_ADD(ctx1, data1);
+    SLLIST_ADD(ctx1, data2);
+    SLLIST_SIZE(ctx1, s);
+    SUT_ASSERT_VAR_EQUAL(s, 6);
 
-    Sllist_Insert(ctx1, 0, data3);
-    Sllist_Size(ctx1, s);
-    printf("intereasting size: %d\n", s);
-    Sllist_Insert(ctx1, 2, data3);
-    Sllist_Size(ctx1, s);
-    printf("intereasting size: %d\n", s);
+    SLLIST_INSERT(ctx1, 0, data3);
+    SLLIST_SIZE(ctx1, s);
+    SUT_ASSERT_VAR_EQUAL(s, 7);
+        
+    SLLIST_INSERT(ctx1, 2, data3);
+    SLLIST_SIZE(ctx1, s);
+    SUT_ASSERT_VAR_EQUAL(s, 8);
    
     ctx1->iter = ctx1->start;
     int i;
@@ -54,11 +59,11 @@ int tc_1(void) {
     }
     printf("\n");
 
-    Sllist_Free(ctx1);
-    Sllist_Size(ctx1, s);
-    printf("size: %d\n", s);
+    SLLIST_FREE(ctx1);
+    SLLIST_SIZE(ctx1, s);
+    SUT_ASSERT_VAR_EQUAL(s, 0);
 
-    Sllist_Destroy(ctx1);
+    SLLIST_DESTROY(ctx1);
     free(data1);
     free(data2);
     free(data3);

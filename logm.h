@@ -10,15 +10,21 @@
 #define ALLOC_STEP 256
 
 
-#define Logm_Open(ctx1, arrdata, datasize)            \
-    Darr_Create(ctx1, arrdata, datasize, ALLOC_STEP);
-
+#define LOGM_OPEN(ctx1, arrdata, datasize)                \
+	do {                                                  \
+		DARR_CREATE(ctx1, arrdata, datasize, ALLOC_STEP); \
+	} while(0)
+	
 /*add entry to darr arrdata, entry must be malloc of type arrdata*/
-#define Logm_Print(ctx1, arrdata, entry) \
-    Darr_Add(ctx1, arrdata, entry);
-
-#define Logm_Close(ctx1, arrdata) \
-    Darr_Destroy(ctx1, arrdata); 
+#define LOGM_PRINT(ctx1, arrdata, entry) \
+	do {                                 \
+		DARR_ADD(ctx1, arrdata, entry);  \
+	} while(0)
+	
+#define LOGM_CLOSE(ctx1, arrdata)    \
+	do {                             \
+		DARR_DESTROY(ctx1, arrdata); \
+	} while(0) 
 
 	
 #endif

@@ -18,55 +18,77 @@ context - type darr_ctx
 data - whatever data
 ssize - datasize
 cap - capacity*/
-#define Darr_Create(context, data, ssize, cap)      \
-    context = (darr_ctx *)malloc(sizeof(darr_ctx)); \
-    memset(context, 0, sizeof(darr_ctx));           \
-    context->datasize = ssize;                      \
-    context->step = cap;                            \
-    data = malloc(context->datasize * cap);         \
-    memset(data ,0 ,context->datasize * cap);       \
-    context->capacity = cap;                        \
-    context->size = 0;
+#define DARR_CREATE(context, data, ssize, cap)             \
+	do {                                                   \
+		context = (darr_ctx *)calloc(1, sizeof(darr_ctx)); \
+		context->datasize = ssize;                         \
+		context->step = cap;                               \
+		data = calloc(1, context->datasize * cap);         \
+		context->capacity = cap;                           \
+		context->size = 0;                                 \
+	} while(0)
 
 /*realloc array capacity*/
-#define Darr_Resize(context, data, cap)            \
-    data = realloc(data, cap * context->datasize); \
-    context->capacity = cap;                                    
+#define DARR_RESIZE(context, data, cap)                \
+	do {                                               \
+		data = realloc(data, cap * context->datasize); \
+		context->capacity = cap;                       \
+	} while(0)                                    
 
 /*get array entry*/
-#define Darr_Get(context, data, out, index)  \
-    if(index >= 0 && index < context->size)  \
-        out = &data[index];                  \
-    else                                     \
-        out = NULL;
-
+#define DARR_GET(context, data, out, index)      \
+	do {                                         \
+		if(index >= 0 && index < context->size)  \
+			out = &data[index];                  \
+		else                                     \
+			out = NULL;                          \
+	} while(0)
+	
 /*set array entry*/
-#define Darr_Set(context, data, datain, index) \
-    data[index] = *datain;
+#define DARR_SET(context, data, datain, index) \
+	do {                                       \
+		data[index] = *datain;                 \
+	} while(0)
 
 /*add entry and realloc twice the size if necessary*/
-#define Darr_Add(context, data, datain)                              \
-    context->size++;                                                 \
-    if (context->size > context->capacity) {                         \
-        context->capacity = context->capacity * context->step;       \
-        data = realloc(data, context->capacity * context->datasize); \
-    }                                                                \
-    data[context->size - 1] = *datain; 
+#define DARR_ADD(context, data, datain)                                  \
+	do {															     \
+	    context->size++;                                                 \
+	    if (context->size > context->capacity) {                         \
+	        context->capacity = context->capacity * context->step;       \
+	        data = realloc(data, context->capacity * context->datasize); \
+	    }                                                                \
+	    data[context->size - 1] = *datain;                               \
+	} while(0)
 
 /*get array current size*/
-#define Darr_Size(context, data, sz) \
-    sz = context->size;
+#define DARR_SIZE(context, data, sz) \
+	do {                             \
+		sz = context->size;          \
+	} while(0)
                     
-#define Darr_Free(context, data) \
-    context->size = 0;           \
-    context->capacity = 0;             
+#define DARR_RESET(context, data) \
+	do {                          \
+	    context->size = 0;        \
+	    context->capacity = 0;    \
+	} while(0)         
 
+#define DARR_FREE(context, data)  \
+	do {                          \
+		free(data);               \
+	    data = NULL;              \
+	    context->size = 0;        \
+	    context->capacity = 0;    \
+	} while(0)         
+	
 /*destroy array*/
-#define Darr_Destroy(context, data) \
-    free(data);                     \
-    data = NULL;                    \
-    free(context);                  \
-    context = NULL;
+#define DARR_DESTROY(context, data) \
+	do {                            \
+	    free(data);                 \
+	    data = NULL;                \
+	    free(context);              \
+	    context = NULL;             \
+	} while(0)
     
 	
 #endif

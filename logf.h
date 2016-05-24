@@ -11,23 +11,32 @@ typedef struct {
 } logf_ctx;
 
 
-#define Logf_Create(context)                        \
-    context = (logf_ctx *)malloc(sizeof(logf_ctx)); \
-    memset(context, 0, sizeof(logf_ctx));
+#define LOGF_CREATE(context)                            \
+	do {                                                \
+	    context = (logf_ctx *)malloc(sizeof(logf_ctx)); \
+	    memset(context, 0, sizeof(logf_ctx));           \
+	} while(0)
 
-#define Logf_Open(context, path, open_type) \
-    context->file = fopen(path, open_type);
+#define LOGF_OPEN(context, path, open_type)     \
+	do {                                        \
+		context->file = fopen(path, open_type); \
+	} while(0)
 
-#define Logf_Print(context, message, ...)                                             \
-    fprintf(context->file, "%s:%d - " message ,  __FILE__, __LINE__ , ##__VA_ARGS__); \
-    fflush(context->file);
+#define LOGF_PRINT(context, message, ...)                                                 \
+	do {                                                                                  \
+	    fprintf(context->file, "%s:%d - " message ,  __FILE__, __LINE__ , ##__VA_ARGS__); \
+	    fflush(context->file);                                                            \
+	} while(0)
 
-#define Logf_Close(context) \
-    fclose(context->file);
-
-#define Logf_Destroy(context) \
-    free(context);            \
-    context = NULL;
-
+#define LOGF_CLOSE(context)    \
+	do {                       \
+		fclose(context->file); \
+	} while(0)
+	
+#define LOGF_DESTROY(context) \
+	do {					  \
+	    free(context);        \
+	    context = NULL;       \
+	} while(0)
 	
 #endif
