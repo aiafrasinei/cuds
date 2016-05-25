@@ -66,8 +66,10 @@ int tc_2(void) {
 }
 
 int main(int argc, char *argv[]) {
-	int ret = 0;
-	
-	SUT_RUN_TEST(tc_1, ret);
-	SUT_RUN_TEST(tc_2, ret);
+    int ret = 0;
+    
+    SUT_RUN_TEST(tc_1, ret);
+    SUT_RUN_TEST(tc_2, ret);
+
+    return ret;
 }

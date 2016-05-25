@@ -1,9 +1,12 @@
 # cuds
 c utilities data structures
 
-dynamic array
-singly linked list
-stack
+The code assumes the programmer will take care of error checking, macro function should be checked for NULL pointers.
 
-logger (file, memory)
-sut - simple unit tests
+content:
+    dynamic array
+    singly linked list
+    stack
+
+    logger (file, memory)
+    sut - simple unit tests
