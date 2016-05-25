@@ -18,13 +18,13 @@ int tc_1(void) {
     entry = (struct memlog *)malloc(sizeof(struct memlog));
     snprintf(entry->text, LOG_STRING_SIZE,  "bla bla");
 
-    Logm_Open(ctx1, arrd, sizeof(struct memlog));
-    Logm_Print(ctx1, arrd, entry);
-    Logm_Print(ctx1, arrd, entry);
-    Logm_Print(ctx1, arrd, entry);
-    Darr_Size(ctx1, arrd, s);
+    LOGM_OPEN(ctx1, arrd, sizeof(struct memlog));
+    LOGM_PRINT(ctx1, arrd, entry);
+    LOGM_PRINT(ctx1, arrd, entry);
+    LOGM_PRINT(ctx1, arrd, entry);
+    DARR_SIZE(ctx1, arrd, s);
     printf("size: %d\n", s);
-    Logm_Close(ctx1, arrd);
+    LOGM_CLOSE(ctx1, arrd);
     free(entry);
 
     return 0;

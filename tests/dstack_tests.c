@@ -15,14 +15,12 @@ int tc_1(void) {
     data2->i = 11;
     unsigned int size = 0;
 
-    tdat *dataout = NULL;
-
     DSTACK_CREATE(ctx1);
     DSTACK_PUSH(ctx1, data1);
     DSTACK_PUSH(ctx1, data2);
-    DSTACK_POP(ctx1,  dataout);
-    DSTACK_POP(ctx1, dataout);
-    DSTACK_POP(ctx1, dataout);
+    DSTACK_POP(ctx1);
+    DSTACK_POP(ctx1);
+    DSTACK_POP(ctx1);
     DSTACK_SIZE(ctx1, size);
     SUT_ASSERT_VAR_EQUAL(size, 0);
     
@@ -63,7 +61,6 @@ int tc_3(void) {
     dstack_ctx *ctx1 = NULL;
     tdat *data1 = (tdat *)malloc(sizeof(tdat));
     data1->i = 10;
-    tdat *dataout = NULL;
     unsigned int size = 0;
     int nr_items = 10000;
     int i;

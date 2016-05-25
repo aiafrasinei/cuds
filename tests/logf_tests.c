@@ -5,11 +5,11 @@
 int tc_1(void) {
 
     logf_ctx *ctx1 = NULL;
-    Logf_Create(ctx1);
-    Logf_Open(ctx1, "test.log", "w");
-    Logf_Print(ctx1, "test %d\n", 1);
-    Logf_Close(ctx1);
-    Logf_Destroy(ctx1);
+    LOGF_CREATE(ctx1);
+    LOGF_OPEN(ctx1, "test.log", "w");
+    LOGF_PRINT(ctx1, "test %d\n", 1);
+    LOGF_CLOSE(ctx1);
+    LOGF_DESTROY(ctx1);
 
     return 0;
 }

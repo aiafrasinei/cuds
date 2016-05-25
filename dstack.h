@@ -42,7 +42,18 @@ typedef struct {
             context->size++;                                                     \
     } while(0)
 
-#define DSTACK_POP(context, dataout) \
+#define DSTACK_POP(context) \
+    do {                                                \
+        if (context->size >= 1) {                       \
+            struct sllnode *temp = context->iter->next; \
+            free(context->iter);                        \
+            context->iter = temp;                       \
+            context->size--;                            \
+        }                                               \
+    } while(0)
+
+
+#define DSTACK_PEEK(context, dataout) \
     do {                                                \
         if (context->size >= 1) {                       \
             struct sllnode *temp = context->iter->next; \
