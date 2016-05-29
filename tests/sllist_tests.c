@@ -24,32 +24,32 @@ int tc_1(void) {
     SLLIST_ADD(ctx1, data1);
     SLLIST_ADD(ctx1, data1);
     SLLIST_GET(ctx1, 1, dataout);
-    SUT_ASSERT_VAR_EQUAL(dataout->i, 13);
+    SUT_ASSERT_VAR_EQUAL("check get", dataout->i, 13);
     
     SLLIST_ADD(ctx1, data2);
     SLLIST_SIZE(ctx1, s);
-    SUT_ASSERT_VAR_EQUAL(s, 4);
+    SUT_ASSERT_VAR_EQUAL("check size", s, 4);
 
     SLLIST_GET(ctx1, 0, dataout);
-    SUT_ASSERT_VAR_EQUAL(dataout->i, 13);
+    SUT_ASSERT_VAR_EQUAL("check get again", dataout->i, 13);
         
     SLLIST_SET(ctx1, 0, data3);
     SLLIST_GET(ctx1, 0, dataout);
-    SUT_ASSERT_VAR_EQUAL(dataout->i, 100);
+    SUT_ASSERT_VAR_EQUAL("check set", dataout->i, 100);
 
 
     SLLIST_ADD(ctx1, data1);
     SLLIST_ADD(ctx1, data2);
     SLLIST_SIZE(ctx1, s);
-    SUT_ASSERT_VAR_EQUAL(s, 6);
+    SUT_ASSERT_VAR_EQUAL("check add", s, 6);
 
     SLLIST_INSERT(ctx1, 0, data3);
     SLLIST_SIZE(ctx1, s);
-    SUT_ASSERT_VAR_EQUAL(s, 7);
+    SUT_ASSERT_VAR_EQUAL("check insert", s, 7);
         
     SLLIST_INSERT(ctx1, 2, data3);
     SLLIST_SIZE(ctx1, s);
-    SUT_ASSERT_VAR_EQUAL(s, 8);
+    SUT_ASSERT_VAR_EQUAL("check size after insert", s, 8);
    
     ctx1->iter = ctx1->start;
     int i;
@@ -61,7 +61,7 @@ int tc_1(void) {
 
     SLLIST_FREE(ctx1);
     SLLIST_SIZE(ctx1, s);
-    SUT_ASSERT_VAR_EQUAL(s, 0);
+    SUT_ASSERT_VAR_EQUAL("check free", s, 0);
 
     SLLIST_DESTROY(ctx1);
     free(data1);

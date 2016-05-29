@@ -8,11 +8,11 @@ int tc_1(void) {
     int i = 0;
     int t = 1;
 
-    Sllist_Create(ctx1);
+    SLLIST_CREATE(ctx1);
     for(i=0;i<10000000;i++) {
-        Sllist_Add(ctx1, &t);
+        SLLIST_ADD(ctx1, &t);
     }
-    Sllist_Destroy(ctx1);
+    SLLIST_DESTROY(ctx1);
 
     return 0;
 }

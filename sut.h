@@ -10,46 +10,38 @@
         ret = test();           \
     } while (0)
 
-#define SUT_REPORT(ret) \
-    do {                                                                     \
-        if(ret == 0)                                                         \
-            printf("%s ......... OK\n", __FUNCTION__);                       \
-        else                                                                 \
-            printf("%s ......... FAIL (exit code %d)\n", __FUNCTION__, ret); \
-    } while(0)
-    
-#define SUT_ASSERT(ret, exit_code) \
-    do {                                                                                              \
-        if(ret != exit_code)                                                                          \
-            printf("%s ......... FAIL (exit code %d) (expected %d)\n", __FUNCTION__, ret, exit_code); \
-        else                                                                                          \
-            printf("%s ......... OK\n", __FUNCTION__);                                                \
-    } while(0)
-    
-#define SUT_ASSERT_VAR_EQUAL(var, value) \
-    do {                                                                                      \
-        if(var != value)                                                                      \
-            printf("%s ......... FAIL (value %d) (expected %d)\n", __FUNCTION__, var, value); \
-        else                                                                                  \
-            printf("%s ......... OK\n", __FUNCTION__);                                        \
+#define SUT_ASSERT_FUNC_EXITCODE(tinfo, ret, exit_code) \
+    do {                                                                                                          \
+        if(ret != exit_code)                                                                                      \
+            printf("%s - %s ......... FAIL (exit code %d) (expected %d)\n", __FUNCTION__, tinfo, ret, exit_code); \
+        else                                                                                                      \
+            printf("%s - %s  ......... OK\n", __FUNCTION__, tinfo);                                               \
     } while(0)
 
-#define SUT_ASSERT_VAR_NOT_EQUAL(var, value) \
-    do {                                                                                    \
-        if(var != value)                                                                    \
-            printf("%s ......... OK\n", __FUNCTION__);                                      \
-        else                                                                                \
-            printf("%s ......... FAIL (value %d) (equals %d)\n", __FUNCTION__, var, value); \
+#define SUT_ASSERT_VAR_EQUAL(tinfo, var, value) \
+    do {                                                                                                  \
+        if(var != value)                                                                                  \
+            printf("%s - %s ......... FAIL (value %d) (expected %d)\n", __FUNCTION__, tinfo, var, value); \
+        else                                                                                              \
+            printf("%s - %s ......... OK\n", __FUNCTION__, tinfo);                                        \
+    } while(0)
+
+#define SUT_ASSERT_VAR_NOT_EQUAL(tinfo, var, value) \
+    do {                                                                                                \
+        if(var != value)                                                                                \
+            printf("%s - %s ......... OK\n", __FUNCTION__, tinfo);                                      \
+        else                                                                                            \
+            printf("%s - %s ......... FAIL (value %d) (equals %d)\n", __FUNCTION__, tinfo, var, value); \
     } while(0)
     
-#define SUT_FAIL(info) \
-    do {                                                        \
-        printf("%s ......... FAIL (%s)\n", __FUNCTION__, info); \
+#define SUT_FAIL(tinfo) \
+    do {                                                         \
+        printf("%s - %s ......... FAIL\n", __FUNCTION__, tinfo); \
     } while(0)
     
-#define SUT_OK(info) \
+#define SUT_OK(tinfo) \
     do {                                                      \
-        printf("%s ......... OK (%s)\n", __FUNCTION__, info); \
+        printf("%s - %s ......... OK\n", __FUNCTION__, tinfo); \
     } while(0)
 
 #endif

@@ -14,15 +14,19 @@ int tc_1(void) {
     tdat *data2 = (tdat *)malloc(sizeof(tdat));
     data2->i = 11;
     unsigned int size = 0;
+    tdat *dataout = NULL; 
 
     DSTACK_CREATE(ctx1);
     DSTACK_PUSH(ctx1, data1);
     DSTACK_PUSH(ctx1, data2);
+    DSTACK_PEEK(ctx1, dataout);
+    SUT_ASSERT_VAR_EQUAL("check peek", dataout->i, 11);
+
     DSTACK_POP(ctx1);
     DSTACK_POP(ctx1);
     DSTACK_POP(ctx1);
     DSTACK_SIZE(ctx1, size);
-    SUT_ASSERT_VAR_EQUAL(size, 0);
+    SUT_ASSERT_VAR_EQUAL("check size", size, 0);
     
     DSTACK_DESTROY(ctx1);
     free(data1);
@@ -43,12 +47,12 @@ int tc_2(void) {
     DSTACK_CREATE(ctx1);
     DSTACK_PUSH(ctx1, data1);
     DSTACK_SIZE(ctx1, size);
-    SUT_ASSERT_VAR_EQUAL(size, 1);
+    SUT_ASSERT_VAR_EQUAL("check push", size, 1);
     
     DSTACK_PUSH(ctx1, data1);
     DSTACK_FREE(ctx1);
     DSTACK_SIZE(ctx1, size);
-    SUT_ASSERT_VAR_EQUAL(size, 0);
+    SUT_ASSERT_VAR_EQUAL("check free", size, 0);
     
     DSTACK_DESTROY(ctx1);
     free(data1);
@@ -70,7 +74,7 @@ int tc_3(void) {
         DSTACK_PUSH(ctx1, data1);
     }
     DSTACK_SIZE(ctx1, size);
-    SUT_ASSERT_VAR_EQUAL(size, nr_items);
+    SUT_ASSERT_VAR_EQUAL("check multiple push", size, nr_items);
     
     DSTACK_DESTROY(ctx1);
     free(data1);

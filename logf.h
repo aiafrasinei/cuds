@@ -13,8 +13,7 @@ typedef struct {
 
 #define LOGF_CREATE(context) \
     do {                                                \
-        context = (logf_ctx *)malloc(sizeof(logf_ctx)); \
-        memset(context, 0, sizeof(logf_ctx));           \
+        context = (logf_ctx *)calloc(1, sizeof(logf_ctx)); \
     } while(0)
 
 #define LOGF_OPEN(context, path, open_type) \

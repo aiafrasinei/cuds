@@ -74,12 +74,6 @@ cap - capacity*/
         sz = context->size;          \
     } while(0)
                     
-#define DARR_RESET(context, data) \
-    do {                          \
-        context->size = 0;        \
-        context->capacity = 0;    \
-    } while(0)         
-
 #define DARR_FREE(context, data) \
     do {                         \
         if(data != NULL) {       \

@@ -67,10 +67,6 @@ typedef struct {
 #define DSTACK_SIZE(context, size) \
     size = context->size;
 
-/*reset stack*/
-#define DSTACK_RESET(context) \
-    context->size = 0;
-    
 /*free stack*/
 #define DSTACK_FREE(context) \
     do {                                                     \

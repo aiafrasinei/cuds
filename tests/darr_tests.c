@@ -21,7 +21,7 @@ int tc_1(void) {
     DARR_ADD(ctx1, arrd, data1);
     DARR_ADD(ctx1, arrd, data1);
     DARR_SIZE(ctx1, arrd, size);
-    SUT_ASSERT_VAR_EQUAL(size, 3);
+    SUT_ASSERT_VAR_EQUAL("check size function", size, 3);
     
     DARR_DESTROY(ctx1, arrd);
     free(data1);
@@ -47,14 +47,14 @@ int tc_2(void) {
     DARR_ADD(ctx1, arrd, data1);
     DARR_ADD(ctx1, arrd, data1);
     DARR_GET(ctx1, arrd, dataout, 1);
-    SUT_ASSERT_VAR_EQUAL(dataout->i, 10);
+    SUT_ASSERT_VAR_EQUAL("check get function", dataout->i, 10);
     
     DARR_SET(ctx1, arrd, data3, 1);
     DARR_SIZE(ctx1, arrd, size);
-    SUT_ASSERT_VAR_EQUAL(size, 2);
+    SUT_ASSERT_VAR_EQUAL("check size after set", size, 2);
     
     DARR_GET(ctx1, arrd, dataout, 1);
-    SUT_ASSERT_VAR_EQUAL(dataout->i, 12);
+    SUT_ASSERT_VAR_EQUAL("check get after set", dataout->i, 12);
     
     DARR_DESTROY(ctx1, arrd);
 
