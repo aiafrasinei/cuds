@@ -10,7 +10,6 @@ typedef struct {
 int tc_1(void) {
     darr_ctx *ctx1 = NULL;
     tdat *arrd = NULL;
-    tdat *arrd1 = NULL;
     int size;
 
     tdat *data1 = (tdat *)malloc(sizeof(tdat));
@@ -32,7 +31,6 @@ int tc_1(void) {
 int tc_2(void) {
     darr_ctx *ctx1 = NULL;
     tdat *arrd = NULL;
-    tdat *arrd1 = NULL;
     int size;
 
     tdat *data1 = (tdat *)malloc(sizeof(tdat));
@@ -66,10 +64,8 @@ int tc_2(void) {
 }
 
 int main(int argc, char *argv[]) {
-    int ret = 0;
-    
-    SUT_RUN_TEST(tc_1, ret);
-    SUT_RUN_TEST(tc_2, ret);
+    tc_1();
+    tc_2();
 
-    return ret;
+    return 0;
 }

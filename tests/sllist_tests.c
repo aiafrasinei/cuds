@@ -73,4 +73,6 @@ int tc_1(void) {
 
 int main(int argc, char *argv[]) {
     tc_1();
+
+    return 0;
 }

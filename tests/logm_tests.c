@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "../darr.h"
 #include "../logm.h"
+#include "../sut.h"
+
 
 #define LOG_STRING_SIZE 512
 
@@ -23,7 +25,7 @@ int tc_1(void) {
     LOGM_PRINT(ctx1, arrd, entry);
     LOGM_PRINT(ctx1, arrd, entry);
     DARR_SIZE(ctx1, arrd, s);
-    printf("size: %d\n", s);
+    SUT_ASSERT_VAR_EQUAL("check log size", s, 3);
     LOGM_CLOSE(ctx1, arrd);
     free(entry);
 
@@ -32,4 +34,6 @@ int tc_1(void) {
 
 int main(int argc, char *argv[]) {
     tc_1();
+
+    return 0;
 }

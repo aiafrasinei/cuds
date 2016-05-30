@@ -13,7 +13,7 @@ int tc_1(void) {
     data1->i = 10;
     tdat *data2 = (tdat *)malloc(sizeof(tdat));
     data2->i = 11;
-    unsigned int size = 0;
+    int size = 0;
     tdat *dataout = NULL; 
 
     DSTACK_CREATE(ctx1);
@@ -41,8 +41,7 @@ int tc_2(void) {
     data1->i = 10;
     tdat *data2 = (tdat *)malloc(sizeof(tdat));
     data2->i = 11;
-    tdat *dataout = NULL;
-    unsigned int size = 0;
+    int size = 0;
 
     DSTACK_CREATE(ctx1);
     DSTACK_PUSH(ctx1, data1);
@@ -65,7 +64,7 @@ int tc_3(void) {
     dstack_ctx *ctx1 = NULL;
     tdat *data1 = (tdat *)malloc(sizeof(tdat));
     data1->i = 10;
-    unsigned int size = 0;
+    int size = 0;
     int nr_items = 10000;
     int i;
 
@@ -88,4 +87,6 @@ int main(int argc, char *argv[]) {
     tc_1();
     tc_2();
     tc_3();
+
+    return 0;
 }

@@ -5,11 +5,6 @@
 #include <stdio.h>
 
 
-#define SUT_RUN_TEST(test, ret) \
-    do {                        \
-        ret = test();           \
-    } while (0)
-
 #define SUT_ASSERT_FUNC_EXITCODE(tinfo, ret, exit_code) \
     do {                                                                                                          \
         if(ret != exit_code)                                                                                      \
