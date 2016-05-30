@@ -6,10 +6,10 @@
 
 
 typedef struct {
-    unsigned int size;
+    long size;
     size_t datasize;
-    unsigned int capacity;
-    unsigned int step;
+    long capacity;
+    long step;
 } darr_ctx;
 
 

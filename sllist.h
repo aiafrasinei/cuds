@@ -7,7 +7,7 @@
 
 
 typedef struct {
-    unsigned int size;
+    long size;
     struct sllnode *start;
     struct sllnode *end;
     struct sllnode *iter;

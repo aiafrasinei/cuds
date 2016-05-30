@@ -7,7 +7,7 @@
 
 
 typedef struct {
-    unsigned int size;
+    long size;
     struct sllnode *iter;
 } dstack_ctx;
 
