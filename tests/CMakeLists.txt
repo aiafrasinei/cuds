@@ -10,6 +10,9 @@ target_link_libraries(dstack_tests)
 add_executable(sllist_tests sllist_tests.c)
 target_link_libraries(sllist_tests)
 
+add_executable(queue_tests queue_tests.c)
+target_link_libraries(queue_tests)
+
 add_executable(logf_tests logf_tests.c)
 target_link_libraries(logf_tests)
 

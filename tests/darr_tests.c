@@ -12,7 +12,7 @@ int tc_1(void) {
     tdat *arrd = NULL;
     int size;
 
-    tdat *data1 = (tdat *)malloc(sizeof(tdat));
+    tdat *data1 = (tdat *)calloc(1, sizeof(tdat));
     data1->i = 10;
 
     DARR_CREATE(ctx1, arrd, sizeof(tdat), 2);
@@ -33,11 +33,11 @@ int tc_2(void) {
     tdat *arrd = NULL;
     int size;
 
-    tdat *data1 = (tdat *)malloc(sizeof(tdat));
+    tdat *data1 = (tdat *)calloc(1, sizeof(tdat));
     data1->i = 10;
-    tdat *data2 = (tdat *)malloc(sizeof(tdat));
+    tdat *data2 = (tdat *)calloc(1, sizeof(tdat));
     data2->i = 11;
-    tdat *data3 = (tdat *)malloc(sizeof(tdat));
+    tdat *data3 = (tdat *)calloc(1, sizeof(tdat));
     data3->i = 12;
     tdat *dataout = NULL;
 
