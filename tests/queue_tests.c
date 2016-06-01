@@ -20,6 +20,8 @@ int tc_1(void) {
 
     QUEUE_CREATE(ctx1);
 
+    QUEUE_PEEK(ctx1, dataout);
+
     QUEUE_ENQUEUE(ctx1, data1);
     QUEUE_ENQUEUE(ctx1, data1);
     QUEUE_ENQUEUE(ctx1, data1);

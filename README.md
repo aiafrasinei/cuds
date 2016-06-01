@@ -6,6 +6,7 @@ The code assumes the programmer will take care of error checking, macro function
 - dynamic array
 - singly linked list
 - stack
+- queue
 - logger (file, memory)
 - sut (simple unit tests)
 

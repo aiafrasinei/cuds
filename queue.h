@@ -10,7 +10,7 @@ typedef struct {
     long size;
     struct sllnode *start;
     struct sllnode *end;
-    struct sllnode *iter;
+    struct sllnode *temp;
 } queue_ctx;
 
 
@@ -21,28 +21,28 @@ typedef struct {
             context->size = 0;                                 \
             context->start = NULL;                             \
             context->end = NULL;                               \
-            context->iter = NULL;                              \
+            context->temp = NULL;                              \
         }                                                      \
     } while(0)
 
 #define QUEUE_ENQUEUE(context, datain) \
     do {                                                                               \
         if (context->size == 0) {                                                      \
-            context->iter = (struct sllnode *)calloc(1, sizeof(struct sllnode));       \
-            if(context->iter != NULL) {                                                \
-                context->iter->data = datain;                                          \
-                context->iter->next = NULL;                                            \
-                context->start = context->iter;                                        \
-                context->end = context->iter;                                          \
+            context->temp = (struct sllnode *)calloc(1, sizeof(struct sllnode));       \
+            if(context->temp != NULL) {                                                \
+                context->temp->data = datain;                                          \
+                context->temp->next = NULL;                                            \
+                context->start = context->temp;                                        \
+                context->end = context->temp;                                          \
                 context->size++;                                                       \
             }                                                                          \
         } else {                                                                       \
-            context->iter->next = (struct sllnode *)calloc(1, sizeof(struct sllnode)); \
-            if(context->iter->next != NULL) {                                          \
-                context->iter = context->iter->next;                                   \
-                context->iter->data = datain;                                          \
-                context->iter->next = NULL;                                            \
-                context->end = context->iter;                                          \
+            context->temp->next = (struct sllnode *)calloc(1, sizeof(struct sllnode)); \
+            if(context->temp->next != NULL) {                                          \
+                context->temp = context->temp->next;                                   \
+                context->temp->data = datain;                                          \
+                context->temp->next = NULL;                                            \
+                context->end = context->temp;                                          \
                 context->size++;                                                       \
             }                                                                          \
         }                                                                              \
@@ -51,17 +51,17 @@ typedef struct {
 #define QUEUE_DEQUEUE(context) \
     do {                                           \
         if (context->size == 1) {                  \
-            free(context->iter);                   \
+            free(context->temp);                   \
             context->start = NULL;                 \
             context->end = NULL;                   \
-            context->iter = NULL;                  \
+            context->temp = NULL;                  \
             context->size = 0;                     \
         }                                          \
         else if (context->size > 1) {              \
-            context->iter = context->start;        \
+            context->temp = context->start;        \
             context->start = context->start->next; \
-            free(context->iter);                   \
-            context->iter = context->start;        \
+            free(context->temp);                   \
+            context->temp = context->start;        \
             context->size--;                       \
         }                                          \
     } while(0)
@@ -78,11 +78,11 @@ typedef struct {
 #define QUEUE_FREE(context) \
     do {                                     \
         struct sllnode *next_node = NULL;    \
-        context->iter = context->start;      \
-        while(context->iter != NULL) {       \
-            next_node = context->iter->next; \
-            free(context->iter);             \
-            context->iter = next_node;       \
+        context->temp = context->start;      \
+        while(context->temp != NULL) {       \
+            next_node = context->temp->next; \
+            free(context->temp);             \
+            context->temp = next_node;       \
         }                                    \
         context->size = 0;                   \
     } while(0)
@@ -90,13 +90,13 @@ typedef struct {
 
 #define QUEUE_DESTROY(context)                  \
     do {                                         \
-        if(context->iter != NULL) {              \
+        if(context->temp != NULL) {              \
             struct sllnode *next_node = NULL;    \
-            context->iter = context->start;      \
-            while(context->iter != NULL) {       \
-                next_node = context->iter->next; \
-                free(context->iter);             \
-                context->iter = next_node;       \
+            context->temp = context->start;      \
+            while(context->temp != NULL) {       \
+                next_node = context->temp->next; \
+                free(context->temp);             \
+                context->temp = next_node;       \
             }                                    \
         }                                        \
         free(context);                           \
