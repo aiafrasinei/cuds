@@ -22,24 +22,15 @@ typedef struct {
         }                                                      \
     } while(0)
 
-#define DSTACK_PUSH(context, datain) \
-    do {                                                                         \
-        if (context->size == 0) {                                                \
-            context->iter = (struct sllnode *)calloc(1, sizeof(struct sllnode)); \
-            if(context != NULL) {                                                \
-                context->iter->data = datain;                                    \
-                context->iter->next = NULL;                                      \
-            }                                                                    \
-        } else {                                                                 \
-            struct sllnode *temp = context->iter;                                \
-            context->iter = (struct sllnode *)calloc(1, sizeof(struct sllnode)); \
-            if(context != NULL) {                                                \
-                context->iter->data = datain;                                    \
-                context->iter->next = temp;                                      \
-            }                                                                    \
-        }                                                                        \
-        if(context != NULL)                                                      \
-            context->size++;                                                     \
+#define DSTACK_PUSH(context, datain)                                          \
+    do {                                                                      \
+        struct sllnode *temp = context->iter;                                 \
+        context->iter = (struct sllnode *)calloc(1, sizeof(struct sllnode));  \
+        if(context != NULL) {                                                 \
+            context->iter->data = datain;                                     \
+            context->iter->next = temp;                                       \
+            context->size++;                                                  \
+        }                                                                     \
     } while(0)
 
 #define DSTACK_POP(context) \
@@ -53,22 +44,18 @@ typedef struct {
     } while(0)
 
 
-#define DSTACK_PEEK(context, dataout) \
-    do {                                                \
-        if (context->size >= 1) {                       \
-            struct sllnode *temp = context->iter->next; \
-            dataout = context->iter->data;              \
-            free(context->iter);                        \
-            context->iter = temp;                       \
-            context->size--;                            \
-        }                                               \
+#define DSTACK_PEEK(context, dataout)      \
+    do {                                   \
+        if (context->size >= 1) {          \
+            dataout = context->iter->data; \
+        }                                  \
     } while(0)
 
 #define DSTACK_SIZE(context, size) \
     size = context->size;
 
 /*free stack*/
-#define DSTACK_FREE(context) \
+#define DSTACK_FREE(context)                                 \
     do {                                                     \
         while(context->iter != NULL) {                       \
             struct sllnode *next_node = context->iter->next; \
@@ -80,14 +67,10 @@ typedef struct {
 
 /*destroy stack*/
 #define DSTACK_DESTROY(context) \
-    do {                                                     \
-        while(context->iter != NULL) {                       \
-            struct sllnode *next_node = context->iter->next; \
-            free(context->iter);                             \
-            context->iter = next_node;                       \
-        }                                                    \
-        free(context);                                       \
-        context = NULL;                                      \
+    do {                        \
+        DSTACK_FREE(context);   \
+        free(context);          \
+        context = NULL;         \
     } while(0)
 
     

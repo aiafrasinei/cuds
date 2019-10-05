@@ -87,10 +87,7 @@ cap - capacity*/
 /*destroy array*/
 #define DARR_DESTROY(context, data) \
     do {                            \
-        if(data != NULL) {          \
-            free(data);             \
-            data = NULL;            \
-        }                           \
+        DARR_FREE(context, data);   \
         if(context != NULL) {       \
             free(context);          \
             context = NULL;         \

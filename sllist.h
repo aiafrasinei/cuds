@@ -31,21 +31,19 @@ typedef struct {
         if (context->size == 0) {                                                      \
             context->iter = (struct sllnode *)calloc(1, sizeof(struct sllnode));       \
             if(context->iter != NULL) {                                                \
-                context->iter->data = datain;                                          \
-                context->iter->next = NULL;                                            \
                 context->start = context->iter;                                        \
-                context->end = context->iter;                                          \
-                context->size++;                                                       \
             }                                                                          \
         } else {                                                                       \
             context->iter->next = (struct sllnode *)calloc(1, sizeof(struct sllnode)); \
             if(context->iter->next != NULL) {                                          \
                 context->iter = context->iter->next;                                   \
-                context->iter->data = datain;                                          \
-                context->iter->next = NULL;                                            \
-                context->end = context->iter;                                          \
-                context->size++;                                                       \
             }                                                                          \
+        }                                                                              \
+        if(context->iter != NULL) {                                                    \
+            context->iter->data = datain;                                              \
+            context->iter->next = NULL;                                                \
+            context->end = context->iter;                                              \
+            context->size++;                                                           \
         }                                                                              \
     } while(0)
 
@@ -199,13 +197,7 @@ typedef struct {
 #define SLLIST_DESTROY(context)                  \
     do {                                         \
         if(context->iter != NULL) {              \
-            struct sllnode *next_node = NULL;    \
-            context->iter = context->start;      \
-            while(context->iter != NULL) {       \
-                next_node = context->iter->next; \
-                free(context->iter);             \
-                context->iter = next_node;       \
-            }                                    \
+            SLLIST_FREE(context);                \
         }                                        \
         free(context);                           \
         context = NULL;                          \
