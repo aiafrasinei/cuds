@@ -7,9 +7,9 @@
 
 typedef struct {
     long size;
-    size_t datasize;
     long capacity;
     long step;
+    size_t datasize;
 } darr_ctx;
 
 
@@ -20,11 +20,11 @@ ssize - datasize
 cap - capacity*/
 #define DARR_CREATE(context, data, ssize, cap) \
     do {                                                   \
-        context = (darr_ctx *)calloc(1, sizeof(darr_ctx)); \
+        context = (darr_ctx *)malloc(sizeof(darr_ctx));    \
         if(context != NULL) {                              \
             context->datasize = ssize;                     \
             context->step = cap;                           \
-            data = calloc(1, context->datasize * cap);     \
+            data = malloc(cap * context->datasize);        \
             if(data != NULL) {                             \
                 context->capacity = cap;                   \
                 context->size = 0;                         \
@@ -42,18 +42,14 @@ cap - capacity*/
 
 /*get array entry*/
 #define DARR_GET(context, data, out, index) \
-    do {                                         \
-        if(index >= 0 && index < context->size)  \
-            out = &data[index];                  \
-        else                                     \
-            out = NULL;                          \
+    do {                                    \
+        out = &data[index];                 \
     } while(0)
     
 /*set array entry*/
 #define DARR_SET(context, data, datain, index) \
     do {                                       \
-        if(data != NULL)                       \
-            data[index] = *datain;             \
+        data[index] = *datain;                 \
     } while(0)
 
 /*add entry and realloc twice the size if necessary*/
@@ -81,7 +77,6 @@ cap - capacity*/
             data = NULL;         \
         }                        \
         context->size = 0;       \
-        context->capacity = 0;   \
     } while(0)         
     
 /*destroy array*/
